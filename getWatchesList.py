@@ -92,6 +92,7 @@ def getWatchesList(uid):
         url = 'http://weibo.cn/%s/follow?page=%d'  % (uid, page)
         max_num_per_sec(1)
         resp = s.get(url, headers=header)
+        if resp.status_code != 200: raise Exception("%d - status code err" % resp.status_code)
         soup = BeautifulSoup.BeautifulSoup(resp.text)
         try:
             trs = [i.find('tr') for i in soup.findAll('table')]
@@ -117,7 +118,7 @@ def getWatchesList(uid):
 
 if __name__ == "__main__":
 
-    max_num_per_sec = max_num_per_interval_wrapper(1.0)
+    max_num_per_sec = max_num_per_interval_wrapper(2.0)
 
     s = requests.session()
     header = { 'Connection' : 'keep-alive',  'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.82 Safari/537.36', 'Cookie': secret.COOKIES  }
