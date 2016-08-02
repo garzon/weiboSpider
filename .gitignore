@@ -1,0 +1,7 @@
+*.pyc
+watches_data/*
+user_avatar/*
+*.gephi
+secret.py
+*.csv
+*.json
